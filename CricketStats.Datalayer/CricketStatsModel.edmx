@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CricketStatsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BattingInns">
+          <Key>
+            <PropertyRef Name="BatInnsid" />
+            <PropertyRef Name="matchid" />
+            <PropertyRef Name="BatInnsNumber" />
+            <PropertyRef Name="countryid" />
+            <PropertyRef Name="playerid" />
+          </Key>
+          <Property Name="BatInnsid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="matchid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BatInnsNumber" Type="smallint" Nullable="false" />
+          <Property Name="countryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="playerid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="runs" Type="int" Nullable="false" />
+          <Property Name="ballsfaced" Type="int" Nullable="false" />
+          <Property Name="fours" Type="int" Nullable="false" />
+          <Property Name="sixes" Type="int" Nullable="false" />
+          <Property Name="bowler_playerid" Type="uniqueidentifier" />
+          <Property Name="fielder_playerid" Type="uniqueidentifier" />
+          <Property Name="dismissalid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BowlingInns">
+          <Key>
+            <PropertyRef Name="bowlingInnsid" />
+            <PropertyRef Name="matchid" />
+            <PropertyRef Name="bowlingInnsnumber" />
+            <PropertyRef Name="countryid" />
+            <PropertyRef Name="playerid" />
+          </Key>
+          <Property Name="bowlingInnsid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="matchid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="bowlingInnsnumber" Type="smallint" Nullable="false" />
+          <Property Name="countryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="playerid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="runs" Type="int" />
+          <Property Name="wickets" Type="int" />
+          <Property Name="maidens" Type="int" />
+          <Property Name="overs" Type="int" />
+          <Property Name="extras" Type="int" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="countryid" />
+          </Key>
+          <Property Name="countryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="countrycode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="countrydesc" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dismissals">
+          <Key>
+            <PropertyRef Name="dismissalid" />
+          </Key>
+          <Property Name="dismissalid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="dismissalcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="dismissaldesc" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="matchid" />
+          </Key>
+          <Property Name="matchid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="matchnumber" Type="smallint" Nullable="false" />
+          <Property Name="homecountryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="awaycountryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="venueid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="matchtypeid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="matchstartdate" Type="datetime" />
+          <Property Name="tosswinnercountryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatchType">
+          <Key>
+            <PropertyRef Name="matchtypeid" />
+          </Key>
+          <Property Name="matchtypeid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="matchtypename" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="playerid" />
+          </Key>
+          <Property Name="playerid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="playername" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="playersurname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="countryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="dob" Type="datetime" Nullable="false" />
+          <Property Name="retired" Type="bit" />
+          <Property Name="lastupdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="venueid" />
+          </Key>
+          <Property Name="venueid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="venuename" Type="nvarchar" MaxLength="100" />
+          <Property Name="venuecity" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="countryid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="lastupdated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_PlayerList">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="HasRetired" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="varchar" MaxLength="30" />
+          <Property Name="HasRetired" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BattingInns_Dismissals">
+          <End Role="Dismissals" Type="Self.Dismissals" Multiplicity="1" />
+          <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dismissals">
+              <PropertyRef Name="dismissalid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="dismissalid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_BowlingInns">
+          <End Role="BowlingInns" Type="Self.BowlingInns" Multiplicity="1" />
+          <End Role="BowlingInns1" Type="Self.BowlingInns" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BowlingInns">
+              <PropertyRef Name="bowlingInnsid" />
+              <PropertyRef Name="matchid" />
+              <PropertyRef Name="bowlingInnsnumber" />
+              <PropertyRef Name="countryid" />
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BowlingInns1">
+              <PropertyRef Name="bowlingInnsid" />
+              <PropertyRef Name="matchid" />
+              <PropertyRef Name="bowlingInnsnumber" />
+              <PropertyRef Name="countryid" />
+              <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venue_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Venue">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetPlayersByCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetVenuesByCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <EntityContainer Name="CricketStatsModelStoreContainer">
+          <EntitySet Name="BattingInns" EntityType="Self.BattingInns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BowlingInns" EntityType="Self.BowlingInns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dismissals" EntityType="Self.Dismissals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatchType" EntityType="Self.MatchType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venue" EntityType="Self.Venue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_PlayerList" EntityType="Self.vw_PlayerList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_PlayerList].[ID] AS [ID], 
+    [vw_PlayerList].[Name] AS [Name], 
+    [vw_PlayerList].[Surname] AS [Surname], 
+    [vw_PlayerList].[Country] AS [Country], 
+    [vw_PlayerList].[DateOfBirth] AS [DateOfBirth], 
+    [vw_PlayerList].[HasRetired] AS [HasRetired]
+    FROM [dbo].[vw_PlayerList] AS [vw_PlayerList]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BattingInns_Dismissals" Association="Self.FK_BattingInns_Dismissals">
+            <End Role="Dismissals" EntitySet="Dismissals" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_BowlingInns" Association="Self.FK_BowlingInns_BowlingInns">
+            <End Role="BowlingInns" EntitySet="BowlingInns" />
+            <End Role="BowlingInns1" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Country" Association="Self.FK_Player_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venue_Country" Association="Self.FK_Venue_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Venue" EntitySet="Venue" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CricketStatsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BattingInn">
+          <Key>
+            <PropertyRef Name="BatInnsid" />
+            <PropertyRef Name="matchid" />
+            <PropertyRef Name="BatInnsNumber" />
+            <PropertyRef Name="countryid" />
+            <PropertyRef Name="playerid" />
+          </Key>
+          <Property Name="BatInnsid" Type="Guid" Nullable="false" />
+          <Property Name="matchid" Type="Guid" Nullable="false" />
+          <Property Name="BatInnsNumber" Type="Int16" Nullable="false" />
+          <Property Name="countryid" Type="Guid" Nullable="false" />
+          <Property Name="playerid" Type="Guid" Nullable="false" />
+          <Property Name="runs" Type="Int32" Nullable="false" />
+          <Property Name="ballsfaced" Type="Int32" Nullable="false" />
+          <Property Name="fours" Type="Int32" Nullable="false" />
+          <Property Name="sixes" Type="Int32" Nullable="false" />
+          <Property Name="bowler_playerid" Type="Guid" />
+          <Property Name="fielder_playerid" Type="Guid" />
+          <Property Name="dismissalid" Type="Guid" Nullable="false" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dismissal" Relationship="Self.FK_BattingInns_Dismissals" FromRole="BattingInns" ToRole="Dismissals" />
+        </EntityType>
+        <EntityType Name="BowlingInn">
+          <Key>
+            <PropertyRef Name="bowlingInnsid" />
+            <PropertyRef Name="matchid" />
+            <PropertyRef Name="bowlingInnsnumber" />
+            <PropertyRef Name="countryid" />
+            <PropertyRef Name="playerid" />
+          </Key>
+          <Property Name="bowlingInnsid" Type="Guid" Nullable="false" />
+          <Property Name="matchid" Type="Guid" Nullable="false" />
+          <Property Name="bowlingInnsnumber" Type="Int16" Nullable="false" />
+          <Property Name="countryid" Type="Guid" Nullable="false" />
+          <Property Name="playerid" Type="Guid" Nullable="false" />
+          <Property Name="runs" Type="Int32" />
+          <Property Name="wickets" Type="Int32" />
+          <Property Name="maidens" Type="Int32" />
+          <Property Name="overs" Type="Int32" />
+          <Property Name="extras" Type="Int32" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BowlingInns1" Relationship="Self.FK_BowlingInns_BowlingInns" FromRole="BowlingInns" ToRole="BowlingInns1" />
+          <NavigationProperty Name="BowlingInn1" Relationship="Self.FK_BowlingInns_BowlingInns" FromRole="BowlingInns1" ToRole="BowlingInns" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="countryid" />
+          </Key>
+          <Property Name="countryid" Type="Guid" Nullable="false" />
+          <Property Name="countrycode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="countrydesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Players" Relationship="Self.FK_Player_Country" FromRole="Country" ToRole="Player" />
+          <NavigationProperty Name="Venues" Relationship="Self.FK_Venue_Country" FromRole="Country" ToRole="Venue" />
+        </EntityType>
+        <EntityType Name="Dismissal">
+          <Key>
+            <PropertyRef Name="dismissalid" />
+          </Key>
+          <Property Name="dismissalid" Type="Guid" Nullable="false" />
+          <Property Name="dismissalcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dismissaldesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BattingInns" Relationship="Self.FK_BattingInns_Dismissals" FromRole="Dismissals" ToRole="BattingInns" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="matchid" />
+          </Key>
+          <Property Name="matchid" Type="Guid" Nullable="false" />
+          <Property Name="matchnumber" Type="Int16" Nullable="false" />
+          <Property Name="homecountryid" Type="Guid" Nullable="false" />
+          <Property Name="awaycountryid" Type="Guid" Nullable="false" />
+          <Property Name="venueid" Type="Guid" Nullable="false" />
+          <Property Name="matchtypeid" Type="Guid" Nullable="false" />
+          <Property Name="matchstartdate" Type="DateTime" Precision="3" />
+          <Property Name="tosswinnercountryid" Type="Guid" Nullable="false" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="MatchType">
+          <Key>
+            <PropertyRef Name="matchtypeid" />
+          </Key>
+          <Property Name="matchtypeid" Type="Guid" Nullable="false" />
+          <Property Name="matchtypename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="playerid" />
+          </Key>
+          <Property Name="playerid" Type="Guid" Nullable="false" />
+          <Property Name="playername" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="playersurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="countryid" Type="Guid" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="retired" Type="Boolean" />
+          <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Player_Country" FromRole="Player" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="venueid" />
+          </Key>
+          <Property Name="venueid" Type="Guid" Nullable="false" />
+          <Property Name="venuename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="venuecity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="countryid" Type="Guid" Nullable="false" />
+          <Property Name="lastupdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Venue_Country" FromRole="Venue" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="vw_PlayerList">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="HasRetired" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="HasRetired" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BattingInns_Dismissals">
+          <End Role="Dismissals" Type="Self.Dismissal" Multiplicity="1" />
+          <End Role="BattingInns" Type="Self.BattingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dismissals">
+              <PropertyRef Name="dismissalid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="dismissalid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_BowlingInns">
+          <End Role="BowlingInns" Type="Self.BowlingInn" Multiplicity="1" />
+          <End Role="BowlingInns1" Type="Self.BowlingInn" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BowlingInns">
+              <PropertyRef Name="bowlingInnsid" />
+              <PropertyRef Name="matchid" />
+              <PropertyRef Name="bowlingInnsnumber" />
+              <PropertyRef Name="countryid" />
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BowlingInns1">
+              <PropertyRef Name="bowlingInnsid" />
+              <PropertyRef Name="matchid" />
+              <PropertyRef Name="bowlingInnsnumber" />
+              <PropertyRef Name="countryid" />
+              <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venue_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Venue">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CricketStatsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BattingInns" EntityType="Self.BattingInn" />
+          <EntitySet Name="BowlingInns" EntityType="Self.BowlingInn" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Dismissals" EntityType="Self.Dismissal" />
+          <EntitySet Name="Matches" EntityType="Self.Match" />
+          <EntitySet Name="MatchTypes" EntityType="Self.MatchType" />
+          <EntitySet Name="Players" EntityType="Self.Player" />
+          <EntitySet Name="Venues" EntityType="Self.Venue" />
+          <EntitySet Name="vw_PlayerList" EntityType="Self.vw_PlayerList" />
+          <AssociationSet Name="FK_BattingInns_Dismissals" Association="Self.FK_BattingInns_Dismissals">
+            <End Role="Dismissals" EntitySet="Dismissals" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_BowlingInns" Association="Self.FK_BowlingInns_BowlingInns">
+            <End Role="BowlingInns" EntitySet="BowlingInns" />
+            <End Role="BowlingInns1" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Country" Association="Self.FK_Player_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Player" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venue_Country" Association="Self.FK_Venue_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Venue" EntitySet="Venues" />
+          </AssociationSet>
+          <FunctionImport Name="GetPlayersByCountry" ReturnType="Collection(CricketStatsModel.GetPlayersByCountry_Result)">
+            <Parameter Name="countryid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetVenuesByCountry" ReturnType="Collection(String)">
+            <Parameter Name="countryid" Mode="In" Type="Guid" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetPlayersByCountry_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Retired" Nullable="true" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CricketStatsModelStoreContainer" CdmEntityContainer="CricketStatsEntities">
+          <EntitySetMapping Name="BattingInns">
+            <EntityTypeMapping TypeName="CricketStatsModel.BattingInn">
+              <MappingFragment StoreEntitySet="BattingInns">
+                <ScalarProperty Name="BatInnsid" ColumnName="BatInnsid" />
+                <ScalarProperty Name="matchid" ColumnName="matchid" />
+                <ScalarProperty Name="BatInnsNumber" ColumnName="BatInnsNumber" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="playerid" ColumnName="playerid" />
+                <ScalarProperty Name="runs" ColumnName="runs" />
+                <ScalarProperty Name="ballsfaced" ColumnName="ballsfaced" />
+                <ScalarProperty Name="fours" ColumnName="fours" />
+                <ScalarProperty Name="sixes" ColumnName="sixes" />
+                <ScalarProperty Name="bowler_playerid" ColumnName="bowler_playerid" />
+                <ScalarProperty Name="fielder_playerid" ColumnName="fielder_playerid" />
+                <ScalarProperty Name="dismissalid" ColumnName="dismissalid" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BowlingInns">
+            <EntityTypeMapping TypeName="CricketStatsModel.BowlingInn">
+              <MappingFragment StoreEntitySet="BowlingInns">
+                <ScalarProperty Name="bowlingInnsid" ColumnName="bowlingInnsid" />
+                <ScalarProperty Name="matchid" ColumnName="matchid" />
+                <ScalarProperty Name="bowlingInnsnumber" ColumnName="bowlingInnsnumber" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="playerid" ColumnName="playerid" />
+                <ScalarProperty Name="runs" ColumnName="runs" />
+                <ScalarProperty Name="wickets" ColumnName="wickets" />
+                <ScalarProperty Name="maidens" ColumnName="maidens" />
+                <ScalarProperty Name="overs" ColumnName="overs" />
+                <ScalarProperty Name="extras" ColumnName="extras" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="CricketStatsModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="countrycode" ColumnName="countrycode" />
+                <ScalarProperty Name="countrydesc" ColumnName="countrydesc" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dismissals">
+            <EntityTypeMapping TypeName="CricketStatsModel.Dismissal">
+              <MappingFragment StoreEntitySet="Dismissals">
+                <ScalarProperty Name="dismissalid" ColumnName="dismissalid" />
+                <ScalarProperty Name="dismissalcode" ColumnName="dismissalcode" />
+                <ScalarProperty Name="dismissaldesc" ColumnName="dismissaldesc" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="CricketStatsModel.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="matchid" ColumnName="matchid" />
+                <ScalarProperty Name="matchnumber" ColumnName="matchnumber" />
+                <ScalarProperty Name="homecountryid" ColumnName="homecountryid" />
+                <ScalarProperty Name="awaycountryid" ColumnName="awaycountryid" />
+                <ScalarProperty Name="venueid" ColumnName="venueid" />
+                <ScalarProperty Name="matchtypeid" ColumnName="matchtypeid" />
+                <ScalarProperty Name="matchstartdate" ColumnName="matchstartdate" />
+                <ScalarProperty Name="tosswinnercountryid" ColumnName="tosswinnercountryid" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatchTypes">
+            <EntityTypeMapping TypeName="CricketStatsModel.MatchType">
+              <MappingFragment StoreEntitySet="MatchType">
+                <ScalarProperty Name="matchtypeid" ColumnName="matchtypeid" />
+                <ScalarProperty Name="matchtypename" ColumnName="matchtypename" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="CricketStatsModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="playerid" ColumnName="playerid" />
+                <ScalarProperty Name="playername" ColumnName="playername" />
+                <ScalarProperty Name="playersurname" ColumnName="playersurname" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="retired" ColumnName="retired" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venues">
+            <EntityTypeMapping TypeName="CricketStatsModel.Venue">
+              <MappingFragment StoreEntitySet="Venue">
+                <ScalarProperty Name="venueid" ColumnName="venueid" />
+                <ScalarProperty Name="venuename" ColumnName="venuename" />
+                <ScalarProperty Name="venuecity" ColumnName="venuecity" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_PlayerList">
+            <EntityTypeMapping TypeName="CricketStatsModel.vw_PlayerList">
+              <MappingFragment StoreEntitySet="vw_PlayerList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="HasRetired" ColumnName="HasRetired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPlayersByCountry" FunctionName="CricketStatsModel.Store.GetPlayersByCountry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CricketStatsModel.GetPlayersByCountry_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Retired" ColumnName="Retired" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetVenuesByCountry" FunctionName="CricketStatsModel.Store.GetVenuesByCountry" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
