@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CricketStats.Datalayer
+namespace CricketStats.Models
 {
     using System;
     using System.Data.Entity;
@@ -15,10 +15,10 @@ namespace CricketStats.Datalayer
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class CricketStatsEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public CricketStatsEntities()
-            : base("name=CricketStatsEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

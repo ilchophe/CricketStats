@@ -7,19 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CricketStats.Datalayer
+namespace CricketStats.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Venue
+    public partial class MatchType
     {
-        public System.Guid venueid { get; set; }
-        public string venuename { get; set; }
-        public string venuecity { get; set; }
-        public System.Guid countryid { get; set; }
-        public Nullable<System.DateTime> lastupdated { get; set; }
-    
-        public virtual Country Country { get; set; }
+        public System.Guid matchtypeid { get; set; }
+        public string matchtypename { get; set; }
+        public System.DateTime lastupdated { get; set; }
     }
 }

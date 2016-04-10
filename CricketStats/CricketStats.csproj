@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -178,16 +180,65 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MatchTypesController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BattingInn.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BowlingInn.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CricketStatsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CricketStatsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CricketStatsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CricketStatsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CricketStatsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dismissal.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPlayersByCountry_Result.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Match.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MatchType.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Models\Player.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Venue.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_PlayerList.cs">
+      <DependentUpon>CricketStatsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -233,8 +284,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\CricketStatsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CricketStatsModel.edmx</DependentUpon>
+      <LastGenOutput>CricketStatsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CricketStatsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CricketStatsModel.edmx</DependentUpon>
+      <LastGenOutput>CricketStatsModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\CricketStatsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CricketStatsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CricketStatsModel.edmx.diagram">
+      <DependentUpon>CricketStatsModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -283,6 +351,28 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\Players\Delete.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\Countries\Create.cshtml" />
+    <Content Include="Views\Countries\Delete.cshtml" />
+    <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Countries\Edit.cshtml" />
+    <Content Include="Views\Countries\Index.cshtml" />
+    <Content Include="Views\Venues\Create.cshtml" />
+    <Content Include="Views\Venues\Delete.cshtml" />
+    <Content Include="Views\Venues\Details.cshtml" />
+    <Content Include="Views\Venues\Edit.cshtml" />
+    <Content Include="Views\Venues\Index.cshtml" />
+    <Content Include="Views\MatchTypes\Create.cshtml" />
+    <Content Include="Views\MatchTypes\Delete.cshtml" />
+    <Content Include="Views\MatchTypes\Details.cshtml" />
+    <Content Include="Views\MatchTypes\Edit.cshtml" />
+    <Content Include="Views\MatchTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,10 +386,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CricketStats.Datalayer\CricketStats.Datalayer.csproj">
-      <Project>{e53eab73-a6bb-45b8-9d30-9b8ced628f11}</Project>
-      <Name>CricketStats.Datalayer</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

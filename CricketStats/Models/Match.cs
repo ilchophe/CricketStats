@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CricketStats.Datalayer
+namespace CricketStats.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Player
+    public partial class Match
     {
-        public System.Guid playerid { get; set; }
-        public string playername { get; set; }
-        public string playersurname { get; set; }
-        public System.Guid countryid { get; set; }
-        public System.DateTime dob { get; set; }
-        public Nullable<bool> retired { get; set; }
+        public System.Guid matchid { get; set; }
+        public short matchnumber { get; set; }
+        public System.Guid homecountryid { get; set; }
+        public System.Guid awaycountryid { get; set; }
+        public System.Guid venueid { get; set; }
+        public System.Guid matchtypeid { get; set; }
+        public Nullable<System.DateTime> matchstartdate { get; set; }
+        public System.Guid tosswinnercountryid { get; set; }
         public System.DateTime lastupdated { get; set; }
-    
-        public virtual Country Country { get; set; }
     }
 }

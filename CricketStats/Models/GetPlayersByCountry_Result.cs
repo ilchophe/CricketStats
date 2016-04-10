@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CricketStats.Datalayer
+namespace CricketStats.Models
 {
     using System;
     

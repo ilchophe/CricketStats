@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="17ca5fd11fb94fb8a0bf19924e84dc89" Name="Diagram1">
+      <Diagram DiagramId="fc2d73921f7740a08e16da38e18d8167" Name="Diagram1">
         <EntityTypeShape EntityType="CricketStatsModel.BattingInn" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.BowlingInn" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.Country" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />

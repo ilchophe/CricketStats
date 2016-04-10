@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CricketStats.Models.Player>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.playername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.playersurname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.retired)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.countrycode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.playername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.playersurname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dob)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.retired)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastupdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.countrycode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.playerid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.playerid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.playerid })
+        </td>
+    </tr>
+}
+
+</table>

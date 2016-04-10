@@ -1,0 +1,50 @@
+﻿@model CricketStats.Models.Venue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Venue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.venuename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.venuename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.venuecity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.venuecity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastupdated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.countrycode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.countrycode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.venueid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

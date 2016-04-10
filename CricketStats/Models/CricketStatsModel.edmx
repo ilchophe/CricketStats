@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CricketStatsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CricketStatsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BattingInns">
           <Key>
             <PropertyRef Name="BatInnsid" />
@@ -224,8 +224,7 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
             <End Role="Venue" EntitySet="Venue" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CricketStatsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -412,7 +411,7 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CricketStatsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BattingInns" EntityType="Self.BattingInn" />
           <EntitySet Name="BowlingInns" EntityType="Self.BowlingInn" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
@@ -439,10 +438,10 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
             <End Role="Venue" EntitySet="Venues" />
           </AssociationSet>
           <FunctionImport Name="GetPlayersByCountry" ReturnType="Collection(CricketStatsModel.GetPlayersByCountry_Result)">
-            <Parameter Name="countryid" Mode="In" Type="Guid" />
+          <Parameter Name="countryid" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetVenuesByCountry" ReturnType="Collection(String)">
-            <Parameter Name="countryid" Mode="In" Type="Guid" />
+          <Parameter Name="countryid" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetPlayersByCountry_Result">
@@ -457,7 +456,7 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CricketStatsModelStoreContainer" CdmEntityContainer="CricketStatsEntities">
+        <EntityContainerMapping StorageEntityContainer="CricketStatsModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="BattingInns">
             <EntityTypeMapping TypeName="CricketStatsModel.BattingInn">
               <MappingFragment StoreEntitySet="BattingInns">
