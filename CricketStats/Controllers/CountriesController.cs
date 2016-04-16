@@ -47,11 +47,12 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "countryid,countrycode,countrydesc,lastupdated")] Country country)
+        public async Task<ActionResult> Create([Bind(Include = "countryid,countrycode,countrydesc")] Country country)
         {
             if (ModelState.IsValid)
             {
                 country.countryid = Guid.NewGuid();
+                country.lastupdated = DateTime.Now;
                 db.Countries.Add(country);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -80,10 +81,11 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "countryid,countrycode,countrydesc,lastupdated")] Country country)
+        public async Task<ActionResult> Edit([Bind(Include = "countryid,countrycode,countrydesc")] Country country)
         {
             if (ModelState.IsValid)
             {
+                country.lastupdated = DateTime.Now;
                 db.Entry(country).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

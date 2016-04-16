@@ -40,7 +40,7 @@ namespace CricketStats.Controllers
         // GET: Venues/Create
         public ActionResult Create()
         {
-            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrycode");
+            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrydesc");
             return View();
         }
 
@@ -49,17 +49,18 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "venueid,venuename,venuecity,countryid,lastupdated")] Venue venue)
+        public async Task<ActionResult> Create([Bind(Include = "venueid,venuename,venuecity,countryid")] Venue venue)
         {
             if (ModelState.IsValid)
             {
                 venue.venueid = Guid.NewGuid();
+                venue.lastupdated = DateTime.Now;
                 db.Venues.Add(venue);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrycode", venue.countryid);
+            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrydesc", venue.countryid);
             return View(venue);
         }
 
@@ -75,7 +76,7 @@ namespace CricketStats.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrycode", venue.countryid);
+            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrydesc", venue.countryid);
             return View(venue);
         }
 
@@ -84,15 +85,16 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "venueid,venuename,venuecity,countryid,lastupdated")] Venue venue)
+        public async Task<ActionResult> Edit([Bind(Include = "venueid,venuename,venuecity,countryid")] Venue venue)
         {
             if (ModelState.IsValid)
             {
+                venue.lastupdated = DateTime.Now;
                 db.Entry(venue).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrycode", venue.countryid);
+            ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrydesc", venue.countryid);
             return View(venue);
         }
 

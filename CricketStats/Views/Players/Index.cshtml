@@ -9,6 +9,14 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
+@{
+    WebGrid obj = new WebGrid(Model);
+}
+@obj.GetHtml(tableStyle: "table", numericLinksCount: 10);
+
+
 <table class="table">
     <tr>
         <th>
@@ -27,7 +35,7 @@
             @Html.DisplayNameFor(model => model.lastupdated)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Country.countrycode)
+            @Html.DisplayNameFor(model => model.Country.countrydesc)
         </th>
         <th></th>
     </tr>
@@ -50,7 +58,7 @@
             @Html.DisplayFor(modelItem => item.lastupdated)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Country.countrycode)
+            @Html.DisplayFor(modelItem => item.Country.countrydesc)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.playerid }) |
