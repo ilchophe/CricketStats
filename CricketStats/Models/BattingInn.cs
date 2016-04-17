@@ -29,5 +29,10 @@ namespace CricketStats.Models
         public System.DateTime lastupdated { get; set; }
     
         public virtual Dismissal Dismissal { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Match Match { get; set; }
+        public virtual Player Player { get; set; }
+        public virtual Player PlayerBowler { get; set; }
+        public virtual Player PlayerFielder { get; set; }
     }
 }

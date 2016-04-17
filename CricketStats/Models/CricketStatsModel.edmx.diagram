@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="CricketStatsModel.BowlingInn" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.Country" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.Dismissal" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CricketStatsModel.Match" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CricketStatsModel.Match" Width="1.5" PointX="9.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.MatchType" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.Player" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CricketStatsModel.Venue" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
@@ -18,6 +18,19 @@
         <AssociationConnector Association="CricketStatsModel.FK_BowlingInns_BowlingInns" ManuallyRouted="false" />
         <AssociationConnector Association="CricketStatsModel.FK_Player_Country" ManuallyRouted="false" />
         <AssociationConnector Association="CricketStatsModel.FK_Venue_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="CricketStatsModel.FK_BattingInns_Country" />
+        <AssociationConnector Association="CricketStatsModel.FK_BattingInns_Match" />
+        <AssociationConnector Association="CricketStatsModel.FK_BattingInns_Player" />
+        <AssociationConnector Association="CricketStatsModel.FK_BattingInns_Player_Bowler" />
+        <AssociationConnector Association="CricketStatsModel.FK_BattingInns_Player_Fielder" />
+        <AssociationConnector Association="CricketStatsModel.FK_BowlingInns_Country" />
+        <AssociationConnector Association="CricketStatsModel.FK_BowlingInns_Match" />
+        <AssociationConnector Association="CricketStatsModel.FK_BowlingInns_Player" />
+        <AssociationConnector Association="CricketStatsModel.FK_Match_Away_Country" />
+        <AssociationConnector Association="CricketStatsModel.FK_Match_Home_Country" />
+        <AssociationConnector Association="CricketStatsModel.FK_Match_Toss_Country" />
+        <AssociationConnector Association="CricketStatsModel.FK_Match_MatchType" />
+        <AssociationConnector Association="CricketStatsModel.FK_Match_Venue" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

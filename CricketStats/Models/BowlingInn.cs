@@ -28,5 +28,8 @@ namespace CricketStats.Models
     
         public virtual BowlingInn BowlingInns1 { get; set; }
         public virtual BowlingInn BowlingInn1 { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Match Match { get; set; }
+        public virtual Player Player { get; set; }
     }
 }

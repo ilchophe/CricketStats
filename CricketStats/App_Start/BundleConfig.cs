@@ -24,7 +24,7 @@ namespace CricketStats
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/themes/superhero.bootstrap.css",
+                      "~/Content/themes/darkly.bootstrap.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(

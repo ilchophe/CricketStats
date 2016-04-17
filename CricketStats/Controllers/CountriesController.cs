@@ -18,7 +18,7 @@ namespace CricketStats.Controllers
         // GET: Countries
         public async Task<ActionResult> Index()
         {
-            return View(await db.Countries.ToListAsync());
+            return View(await db.Countries.OrderBy(c => c.countrydesc).ToListAsync());
         }
 
         // GET: Countries/Details/5

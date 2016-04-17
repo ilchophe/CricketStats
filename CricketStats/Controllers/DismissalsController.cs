@@ -46,11 +46,12 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dismissalid,dismissalcode,dismissaldesc,lastupdated")] Dismissal dismissal)
+        public ActionResult Create([Bind(Include = "dismissalid,dismissalcode,dismissaldesc")] Dismissal dismissal)
         {
             if (ModelState.IsValid)
             {
                 dismissal.dismissalid = Guid.NewGuid();
+                dismissal.lastupdated = DateTime.Now;
                 db.Dismissals.Add(dismissal);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,10 +80,11 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dismissalid,dismissalcode,dismissaldesc,lastupdated")] Dismissal dismissal)
+        public ActionResult Edit([Bind(Include = "dismissalid,dismissalcode,dismissaldesc")] Dismissal dismissal)
         {
             if (ModelState.IsValid)
             {
+                dismissal.lastupdated = DateTime.Now;
                 db.Entry(dismissal).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

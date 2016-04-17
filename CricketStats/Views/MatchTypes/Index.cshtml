@@ -1,15 +1,28 @@
 ﻿@model IEnumerable<CricketStats.Models.MatchType>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "MatchTypes";
 }
 
-<h2>Index</h2>
+<h2>Matchtypes Listing</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
 </p>
-<table class="table">
+<table class="StyleTable table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.matchtypename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th class="no-sort"></th>
+        </tr>
+    </thead>
+
+<tfoot class="FooterFilter">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.matchtypename)
@@ -19,21 +32,24 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.matchtypename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastupdated)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.matchtypeid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.matchtypeid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.matchtypeid })
-        </td>
-    </tr>
-}
+</tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.matchtypename)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastupdated)
+                </td>
+                <td  class="no-sort">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.matchtypeid }, new { @class = "btn btn-info btn-xs" }) &nbsp;
+                    @Html.ActionLink("Details", "Details", new { id = item.matchtypeid }, new { @class = "btn btn-success btn-xs" }) &nbsp;
+                    @Html.ActionLink("Delete", "Delete", new { id = item.matchtypeid }, new { @class = "btn btn-danger btn-xs" })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>

@@ -1,51 +1,73 @@
 ﻿@model IEnumerable<CricketStats.Models.Venue>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Venues";
 }
 
-<h2>Index</h2>
+<h2>Venue Listing</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.venuename)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.venuecity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastupdated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.countrydesc)
-        </th>
-        <th></th>
-    </tr>
+<table class="StyleTable table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.venuename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.venuecity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country.countrydesc)
+            </th>
+            <th class="no-sort"></th>
+        </tr>
+    </thead>
+    <tfoot class="FooterFilter">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.venuename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.venuecity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country.countrydesc)
+            </th>
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.venuename)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.venuecity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastupdated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.countrydesc)
+                </td>
+                <td  class="no-sort">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.venueid }, new { @class = "btn btn-info btn-xs" }) &nbsp;
+                    @Html.ActionLink("Details", "Details", new { id = item.venueid }, new { @class = "btn btn-success btn-xs" }) &nbsp;
+                    @Html.ActionLink("Delete", "Delete", new { id = item.venueid }, new { @class = "btn btn-danger btn-xs" })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.venuename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.venuecity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastupdated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.countrydesc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.venueid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.venueid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.venueid })
-        </td>
-    </tr>
-}
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>

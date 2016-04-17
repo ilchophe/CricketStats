@@ -126,6 +126,18 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="DateOfBirth" Type="varchar" MaxLength="30" />
           <Property Name="HasRetired" Type="varchar" MaxLength="3" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BattingInns_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BattingInns_Dismissals">
           <End Role="Dismissals" Type="Self.Dismissals" Multiplicity="1" />
           <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
@@ -135,6 +147,54 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
             </Principal>
             <Dependent Role="BattingInns">
               <PropertyRef Name="dismissalid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="matchid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="matchid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Player_Bowler">
+          <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+          <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="bowler_playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Player_Fielder">
+          <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+          <End Role="BattingInns" Type="Self.BattingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BattingInns">
+              <PropertyRef Name="fielder_playerid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -155,6 +215,102 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
               <PropertyRef Name="bowlingInnsnumber" />
               <PropertyRef Name="countryid" />
               <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="BowlingInns" Type="Self.BowlingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="BowlingInns">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="BowlingInns" Type="Self.BowlingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="matchid" />
+            </Principal>
+            <Dependent Role="BowlingInns">
+              <PropertyRef Name="matchid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_Player">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="BowlingInns" Type="Self.BowlingInns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BowlingInns">
+              <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Away_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="awaycountryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Home_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="homecountryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_MatchType">
+          <End Role="MatchType" Type="Self.MatchType" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatchType">
+              <PropertyRef Name="matchtypeid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="matchtypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Toss_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="tosswinnercountryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Venue">
+          <End Role="Venue" Type="Self.Venue" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="venueid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="venueid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -207,13 +363,65 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
     [vw_PlayerList].[HasRetired] AS [HasRetired]
     FROM [dbo].[vw_PlayerList] AS [vw_PlayerList]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_BattingInns_Country" Association="Self.FK_BattingInns_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
           <AssociationSet Name="FK_BattingInns_Dismissals" Association="Self.FK_BattingInns_Dismissals">
             <End Role="Dismissals" EntitySet="Dismissals" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Match" Association="Self.FK_BattingInns_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Player" Association="Self.FK_BattingInns_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Player_Bowler" Association="Self.FK_BattingInns_Player_Bowler">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="BattingInns" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Player_Fielder" Association="Self.FK_BattingInns_Player_Fielder">
+            <End Role="Player" EntitySet="Player" />
             <End Role="BattingInns" EntitySet="BattingInns" />
           </AssociationSet>
           <AssociationSet Name="FK_BowlingInns_BowlingInns" Association="Self.FK_BowlingInns_BowlingInns">
             <End Role="BowlingInns" EntitySet="BowlingInns" />
             <End Role="BowlingInns1" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_Country" Association="Self.FK_BowlingInns_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="BowlingInns" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_Match" Association="Self.FK_BowlingInns_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="BowlingInns" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_Player" Association="Self.FK_BowlingInns_Player">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="BowlingInns" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Away_Country" Association="Self.FK_Match_Away_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Home_Country" Association="Self.FK_Match_Home_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_MatchType" Association="Self.FK_Match_MatchType">
+            <End Role="MatchType" EntitySet="MatchType" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Toss_Country" Association="Self.FK_Match_Toss_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Venue" Association="Self.FK_Match_Venue">
+            <End Role="Venue" EntitySet="Venue" />
+            <End Role="Match" EntitySet="Match" />
           </AssociationSet>
           <AssociationSet Name="FK_Player_Country" Association="Self.FK_Player_Country">
             <End Role="Country" EntitySet="Country" />
@@ -250,6 +458,11 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="dismissalid" Type="Guid" Nullable="false" />
           <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Dismissal" Relationship="Self.FK_BattingInns_Dismissals" FromRole="BattingInns" ToRole="Dismissals" />
+          <NavigationProperty Name="Country" Relationship="CricketStatsModel.FK_BattingInns_Country" FromRole="BattingInn" ToRole="Country" />
+          <NavigationProperty Name="Match" Relationship="CricketStatsModel.FK_BattingInns_Match" FromRole="BattingInn" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="CricketStatsModel.FK_BattingInns_Player" FromRole="BattingInn" ToRole="Player" />
+          <NavigationProperty Name="PlayerBowler" Relationship="CricketStatsModel.FK_BattingInns_Player_Bowler" FromRole="BattingInn" ToRole="Player" />
+          <NavigationProperty Name="PlayerFielder" Relationship="CricketStatsModel.FK_BattingInns_Player_Fielder" FromRole="BattingInn" ToRole="Player" />
         </EntityType>
         <EntityType Name="BowlingInn">
           <Key>
@@ -272,6 +485,9 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="BowlingInns1" Relationship="Self.FK_BowlingInns_BowlingInns" FromRole="BowlingInns" ToRole="BowlingInns1" />
           <NavigationProperty Name="BowlingInn1" Relationship="Self.FK_BowlingInns_BowlingInns" FromRole="BowlingInns1" ToRole="BowlingInns" />
+          <NavigationProperty Name="Country" Relationship="CricketStatsModel.FK_BowlingInns_Country" FromRole="BowlingInn" ToRole="Country" />
+          <NavigationProperty Name="Match" Relationship="CricketStatsModel.FK_BowlingInns_Match" FromRole="BowlingInn" ToRole="Match" />
+          <NavigationProperty Name="Player" Relationship="CricketStatsModel.FK_BowlingInns_Player" FromRole="BowlingInn" ToRole="Player" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -283,6 +499,11 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Players" Relationship="Self.FK_Player_Country" FromRole="Country" ToRole="Player" />
           <NavigationProperty Name="Venues" Relationship="Self.FK_Venue_Country" FromRole="Country" ToRole="Venue" />
+          <NavigationProperty Name="BattingInns" Relationship="CricketStatsModel.FK_BattingInns_Country" FromRole="Country" ToRole="BattingInn" />
+          <NavigationProperty Name="BowlingInns" Relationship="CricketStatsModel.FK_BowlingInns_Country" FromRole="Country" ToRole="BowlingInn" />
+          <NavigationProperty Name="Matches" Relationship="CricketStatsModel.FK_Match_Away_Country" FromRole="Country" ToRole="Match" />
+          <NavigationProperty Name="MatchesHomeCountry" Relationship="CricketStatsModel.FK_Match_Home_Country" FromRole="Country" ToRole="Match" />
+          <NavigationProperty Name="MatchesTossCountry" Relationship="CricketStatsModel.FK_Match_Toss_Country" FromRole="Country" ToRole="Match" />
         </EntityType>
         <EntityType Name="Dismissal">
           <Key>
@@ -307,6 +528,13 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="matchstartdate" Type="DateTime" Precision="3" />
           <Property Name="tosswinnercountryid" Type="Guid" Nullable="false" />
           <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BattingInns" Relationship="CricketStatsModel.FK_BattingInns_Match" FromRole="Match" ToRole="BattingInn" />
+          <NavigationProperty Name="BowlingInns" Relationship="CricketStatsModel.FK_BowlingInns_Match" FromRole="Match" ToRole="BowlingInn" />
+          <NavigationProperty Name="Country" Relationship="CricketStatsModel.FK_Match_Away_Country" FromRole="Match" ToRole="Country" />
+          <NavigationProperty Name="CountryHome" Relationship="CricketStatsModel.FK_Match_Home_Country" FromRole="Match" ToRole="Country" />
+          <NavigationProperty Name="CountryAway" Relationship="CricketStatsModel.FK_Match_Toss_Country" FromRole="Match" ToRole="Country" />
+          <NavigationProperty Name="MatchType" Relationship="CricketStatsModel.FK_Match_MatchType" FromRole="Match" ToRole="MatchType" />
+          <NavigationProperty Name="Venue" Relationship="CricketStatsModel.FK_Match_Venue" FromRole="Match" ToRole="Venue" />
         </EntityType>
         <EntityType Name="MatchType">
           <Key>
@@ -315,6 +543,7 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="matchtypeid" Type="Guid" Nullable="false" />
           <Property Name="matchtypename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Matches" Relationship="CricketStatsModel.FK_Match_MatchType" FromRole="MatchType" ToRole="Match" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -328,6 +557,10 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="retired" Type="Boolean" />
           <Property Name="lastupdated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Player_Country" FromRole="Player" ToRole="Country" />
+          <NavigationProperty Name="BattingInns" Relationship="CricketStatsModel.FK_BattingInns_Player" FromRole="Player" ToRole="BattingInn" />
+          <NavigationProperty Name="BattingInns1" Relationship="CricketStatsModel.FK_BattingInns_Player_Bowler" FromRole="Player" ToRole="BattingInn" />
+          <NavigationProperty Name="BattingInns2" Relationship="CricketStatsModel.FK_BattingInns_Player_Fielder" FromRole="Player" ToRole="BattingInn" />
+          <NavigationProperty Name="BowlingInns" Relationship="CricketStatsModel.FK_BowlingInns_Player" FromRole="Player" ToRole="BowlingInn" />
         </EntityType>
         <EntityType Name="Venue">
           <Key>
@@ -339,6 +572,7 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Name="countryid" Type="Guid" Nullable="false" />
           <Property Name="lastupdated" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Venue_Country" FromRole="Venue" ToRole="Country" />
+          <NavigationProperty Name="Matches" Relationship="CricketStatsModel.FK_Match_Venue" FromRole="Venue" ToRole="Match" />
         </EntityType>
         <EntityType Name="vw_PlayerList">
           <Key>
@@ -443,6 +677,58 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <FunctionImport Name="GetVenuesByCountry" ReturnType="Collection(String)">
           <Parameter Name="countryid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <AssociationSet Name="FK_BattingInns_Country" Association="CricketStatsModel.FK_BattingInns_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="BattingInn" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Match" Association="CricketStatsModel.FK_BattingInns_Match">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="BattingInn" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Player" Association="CricketStatsModel.FK_BattingInns_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="BattingInn" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Player_Bowler" Association="CricketStatsModel.FK_BattingInns_Player_Bowler">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="BattingInn" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BattingInns_Player_Fielder" Association="CricketStatsModel.FK_BattingInns_Player_Fielder">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="BattingInn" EntitySet="BattingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_Country" Association="CricketStatsModel.FK_BowlingInns_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="BowlingInn" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_Match" Association="CricketStatsModel.FK_BowlingInns_Match">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="BowlingInn" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BowlingInns_Player" Association="CricketStatsModel.FK_BowlingInns_Player">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="BowlingInn" EntitySet="BowlingInns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Away_Country" Association="CricketStatsModel.FK_Match_Away_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Home_Country" Association="CricketStatsModel.FK_Match_Home_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Toss_Country" Association="CricketStatsModel.FK_Match_Toss_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_MatchType" Association="CricketStatsModel.FK_Match_MatchType">
+            <End Role="MatchType" EntitySet="MatchTypes" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Venue" Association="CricketStatsModel.FK_Match_Venue">
+            <End Role="Venue" EntitySet="Venues" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetPlayersByCountry_Result">
           <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
@@ -451,6 +737,162 @@ warning 6002: The table/view 'CricketStats.dbo.vw_PlayerList' does not have a pr
           <Property Type="Boolean" Name="Retired" Nullable="true" />
           <Property Type="Int32" Name="Age" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_BattingInns_Country">
+          <End Type="CricketStatsModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="CricketStatsModel.BattingInn" Role="BattingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="BattingInn">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Match">
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="CricketStatsModel.BattingInn" Role="BattingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="matchid" />
+            </Principal>
+            <Dependent Role="BattingInn">
+              <PropertyRef Name="matchid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Player">
+          <End Type="CricketStatsModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="CricketStatsModel.BattingInn" Role="BattingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BattingInn">
+              <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Player_Bowler">
+          <End Type="CricketStatsModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="CricketStatsModel.BattingInn" Role="BattingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BattingInn">
+              <PropertyRef Name="bowler_playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BattingInns_Player_Fielder">
+          <End Type="CricketStatsModel.Player" Role="Player" Multiplicity="0..1" />
+          <End Type="CricketStatsModel.BattingInn" Role="BattingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BattingInn">
+              <PropertyRef Name="fielder_playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_Country">
+          <End Type="CricketStatsModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="CricketStatsModel.BowlingInn" Role="BowlingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="BowlingInn">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_Match">
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="CricketStatsModel.BowlingInn" Role="BowlingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="matchid" />
+            </Principal>
+            <Dependent Role="BowlingInn">
+              <PropertyRef Name="matchid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BowlingInns_Player">
+          <End Type="CricketStatsModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="CricketStatsModel.BowlingInn" Role="BowlingInn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="playerid" />
+            </Principal>
+            <Dependent Role="BowlingInn">
+              <PropertyRef Name="playerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Away_Country">
+          <End Type="CricketStatsModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="awaycountryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Home_Country">
+          <End Type="CricketStatsModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="homecountryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Toss_Country">
+          <End Type="CricketStatsModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="tosswinnercountryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_MatchType">
+          <End Type="CricketStatsModel.MatchType" Role="MatchType" Multiplicity="1" />
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatchType">
+              <PropertyRef Name="matchtypeid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="matchtypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Venue">
+          <End Type="CricketStatsModel.Venue" Role="Venue" Multiplicity="1" />
+          <End Type="CricketStatsModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="venueid" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="venueid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

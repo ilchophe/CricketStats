@@ -1,15 +1,31 @@
 ﻿@model IEnumerable<CricketStats.Models.Country>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Countries";
 }
 
-<h2>Index</h2>
+<h2>Country Listing</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
 </p>
-<table class="table">
+
+<table class="StyleTable table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.countrycode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.countrydesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th class="no-sort"></th>
+        </tr>
+    </thead>
+<tfoot class="FooterFilter">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.countrycode)
@@ -22,7 +38,8 @@
         </th>
         <th></th>
     </tr>
-
+</tfoot>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -34,12 +51,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.lastupdated)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.countryid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.countryid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.countryid })
+        <td class="no-sort">
+            @Html.ActionLink("Edit", "Edit", new { id = item.countryid }, new { @class = "btn btn-info btn-xs" }) &nbsp;
+            @Html.ActionLink("Details", "Details", new { id = item.countryid }, new { @class = "btn btn-success btn-xs" }) &nbsp;
+            @Html.ActionLink("Delete", "Delete", new { id = item.countryid }, new { @class = "btn btn-danger btn-xs" })
+
         </td>
     </tr>
 }
+    </tbody>
 
 </table>

@@ -14,6 +14,12 @@ namespace CricketStats.Models
     
     public partial class Venue
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Venue()
+        {
+            this.Matches = new HashSet<Match>();
+        }
+    
         public System.Guid venueid { get; set; }
         public string venuename { get; set; }
         public string venuecity { get; set; }
@@ -21,5 +27,7 @@ namespace CricketStats.Models
         public Nullable<System.DateTime> lastupdated { get; set; }
     
         public virtual Country Country { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }

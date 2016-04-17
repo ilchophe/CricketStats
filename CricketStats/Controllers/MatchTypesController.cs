@@ -54,11 +54,12 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "matchtypeid,matchtypename,lastupdated")] MatchType matchType)
+        public async Task<ActionResult> Create([Bind(Include = "matchtypeid,matchtypename")] MatchType matchType)
         {
             if (ModelState.IsValid)
             {
                 matchType.matchtypeid = Guid.NewGuid();
+                matchType.lastupdated = DateTime.Now;
                 db.MatchTypes.Add(matchType);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -87,10 +88,11 @@ namespace CricketStats.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "matchtypeid,matchtypename,lastupdated")] MatchType matchType)
+        public async Task<ActionResult> Edit([Bind(Include = "matchtypeid,matchtypename")] MatchType matchType)
         {
             if (ModelState.IsValid)
             {
+                matchType.lastupdated = DateTime.Now;
                 db.Entry(matchType).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

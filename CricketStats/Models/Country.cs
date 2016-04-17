@@ -19,6 +19,11 @@ namespace CricketStats.Models
         {
             this.Players = new HashSet<Player>();
             this.Venues = new HashSet<Venue>();
+            this.BattingInns = new HashSet<BattingInn>();
+            this.BowlingInns = new HashSet<BowlingInn>();
+            this.Matches = new HashSet<Match>();
+            this.MatchesHomeCountry = new HashSet<Match>();
+            this.MatchesTossCountry = new HashSet<Match>();
         }
     
         public System.Guid countryid { get; set; }
@@ -30,5 +35,15 @@ namespace CricketStats.Models
         public virtual ICollection<Player> Players { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Venue> Venues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BattingInn> BattingInns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BowlingInn> BowlingInns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Match> Matches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Match> MatchesHomeCountry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Match> MatchesTossCountry { get; set; }
     }
 }

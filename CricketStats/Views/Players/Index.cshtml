@@ -4,13 +4,6 @@
     ViewBag.Title = "Players";
 }
 
-@section styles{
-
-    <style>
-        tfoot { display: table-header-group; }
-    </style>
-}
-
 <h2>Player Listing</h2>
 
 <p>
@@ -18,7 +11,7 @@
 </p>
 
 
-<table id="playerTable" class="table table-striped table-bordered">
+<table class="StyleTable table table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -30,7 +23,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.dob)
             </th>
-            <th>
+            <th class="Narrow-col">
                 @Html.DisplayNameFor(model => model.retired)
             </th>
             <th>
@@ -42,7 +35,7 @@
             <th class="no-sort"></th>
         </tr>
     </thead>
-    <tfoot>
+    <tfoot class="FooterFilter">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.playername)
@@ -50,10 +43,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.playersurname)
             </th>
-            <th>
+            <th class="Narrow-col">
                 @Html.DisplayNameFor(model => model.dob)
             </th>
-            <th>
+            <th  class="Narrow-col">
                 @Html.DisplayNameFor(model => model.retired)
             </th>
             <th>
@@ -75,10 +68,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.playersurname)
                 </td>
-                <td>
+                <td class="Narrow-col">
                     @Html.DisplayFor(modelItem => item.dob)
                 </td>
-                <td>
+                <td class="Narrow-col">
                     @Html.DisplayFor(modelItem => item.retired)
                 </td>
                 <td>
@@ -87,60 +80,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Country.countrydesc)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.playerid }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.playerid }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.playerid })
+                <td class="no-sort">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.playerid }, new { @class = "btn btn-info btn-xs" }) &nbsp;
+                    @Html.ActionLink("Details", "Details", new { id = item.playerid }, new { @class = "btn btn-success btn-xs" }) &nbsp;
+                    @Html.ActionLink("Delete", "Delete", new { id = item.playerid }, new { @class = "btn btn-danger btn-xs" })
                 </td>
             </tr>
         }
     </tbody>
 
 </table>
-
-@section Scripts {
-
-    <script>
-        $(document).ready(function () {
-            //$('#playerTable').DataTable(
-            //);
-
-
-            // Setup - add a text input to each footer cell
-            $('#playerTable tfoot th').each(function () {
-                var title = $(this).text();
-                if (title != '') {
-                    $(this).html('<input class="form-control input-sm" type="text" placeholder="' + title + '" />');
-                }
-                
-            });
-
-            // DataTable
-            var table = $('#playerTable').DataTable({
-                "order": [],
-                "columnDefs": [{
-                    "targets": 'no-sort',
-                    "orderable": false,
-                }]
-            });
-
-            // Apply the search
-            table.columns().every(function () {
-                var that = this;
-
-                $('input', this.footer()).on('keyup change', function () {
-                    if (that.search() !== this.value) {
-                        that
-                            .search(this.value)
-                            .draw();
-                    }
-                });
-            });
-
-
-        });
-    </script>
-
-}
 
 

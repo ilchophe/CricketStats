@@ -19,7 +19,7 @@ namespace CricketStats.Controllers
         public async Task<ActionResult> Index()
         {
             var venues = db.Venues.Include(v => v.Country);
-            return View(await venues.ToListAsync());
+            return View(await venues.OrderBy(v => v.venuecity).ThenBy(v => v.Country.countrydesc).ToListAsync());
         }
 
         // GET: Venues/Details/5

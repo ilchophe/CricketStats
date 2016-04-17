@@ -177,7 +177,7 @@ namespace CricketStats.Models
         public string playersurname;
 
         [Display(Name = "Date of Birth")]
-       // [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime dob { get; set; }
 
         [Display(Name = "Retired")]

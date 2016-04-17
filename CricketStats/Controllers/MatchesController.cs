@@ -18,7 +18,15 @@ namespace CricketStats.Controllers
         // GET: Matches
         public async Task<ActionResult> Index(Guid? Matchtype)
         {
-            return View(await db.Matches.Where(m => m.matchtypeid == Matchtype).ToListAsync());
+            var matches = db.Matches.Include(
+                m => m.Country).Include(
+                m => m.BattingInns).Include(
+                m => m.BowlingInns).Include(
+                m => m.Venue).Include(
+                m => m.CountryAway).Include(
+                m => m.CountryHome);
+
+            return View(await matches.Where(m => m.matchtypeid == Matchtype).ToListAsync());
         }
 
           // GET: Matches/Details/5

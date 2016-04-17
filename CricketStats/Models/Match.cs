@@ -14,6 +14,13 @@ namespace CricketStats.Models
     
     public partial class Match
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Match()
+        {
+            this.BattingInns = new HashSet<BattingInn>();
+            this.BowlingInns = new HashSet<BowlingInn>();
+        }
+    
         public System.Guid matchid { get; set; }
         public short matchnumber { get; set; }
         public System.Guid homecountryid { get; set; }
@@ -23,5 +30,15 @@ namespace CricketStats.Models
         public Nullable<System.DateTime> matchstartdate { get; set; }
         public System.Guid tosswinnercountryid { get; set; }
         public System.DateTime lastupdated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BattingInn> BattingInns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BowlingInn> BowlingInns { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Country CountryHome { get; set; }
+        public virtual Country CountryAway { get; set; }
+        public virtual MatchType MatchType { get; set; }
+        public virtual Venue Venue { get; set; }
     }
 }

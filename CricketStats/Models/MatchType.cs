@@ -14,8 +14,17 @@ namespace CricketStats.Models
     
     public partial class MatchType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MatchType()
+        {
+            this.Matches = new HashSet<Match>();
+        }
+    
         public System.Guid matchtypeid { get; set; }
         public string matchtypename { get; set; }
         public System.DateTime lastupdated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }

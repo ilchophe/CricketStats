@@ -391,6 +391,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\darkly.bootstrap.css" />
+    <Content Include="Content\themes\darkly.bootstrap.min.css" />
     <Content Include="Content\themes\superhero.bootstrap.css" />
     <Content Include="Content\themes\superhero.bootstrap.min.css" />
     <Content Include="favicon.ico" />

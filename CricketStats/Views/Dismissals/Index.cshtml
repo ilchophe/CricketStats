@@ -1,15 +1,31 @@
 ﻿@model IEnumerable<CricketStats.Models.Dismissal>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dismissals";
 }
 
-<h2>Index</h2>
+<h2>Dismissal Listing</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
 </p>
-<table class="table">
+<table class="StyleTable table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.dismissalcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dismissaldesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th class="no-sort"></th>
+        </tr>
+    </thead>
+
+<tfoot class="FooterFilter">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.dismissalcode)
@@ -22,7 +38,7 @@
         </th>
         <th></th>
     </tr>
-
+</tfoot>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -34,11 +50,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.lastupdated)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.dismissalid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.dismissalid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.dismissalid })
-        </td>
+        <td class="no-sort">
+            @Html.ActionLink("Edit", "Edit", new { id = item.dismissalid }, new { @class = "btn btn-info btn-xs" }) &nbsp;
+            @Html.ActionLink("Details", "Details", new { id = item.dismissalid }, new { @class = "btn btn-success btn-xs" }) &nbsp;
+            @Html.ActionLink("Delete", "Delete", new { id = item.dismissalid }, new { @class = "btn btn-danger btn-xs" })
+
     </tr>
 }
 

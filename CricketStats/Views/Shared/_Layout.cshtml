@@ -70,6 +70,52 @@
     });
 
 </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+
+            // Setup - add a text input to each footer cell unless it has no header title
+            $('.StyleTable tfoot th').each(function () {
+                var title = $(this).text();
+                if (title != '') {
+                    if ($(this).hasClass("Narrow-col")) {
+                        $(this).html('<input class="form-control form-control-inline input-sm" type="text" placeholder="' + title + '" />');
+                    } else {
+                        $(this).html('<input class="form-control .form-control-inline-full input-sm" type="text" placeholder="' + title + '" />');
+                    }
+                   
+                }
+
+            });
+
+            // DataTable Remove sorting for columns with 'no-sort' class
+            var table = $('.StyleTable').DataTable({
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }, {targets: 'Narrow-col', width: '7%'}]
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
