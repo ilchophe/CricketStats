@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CricketStats.Models.Dismissal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dismissalcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dismissaldesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dismissalcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dismissaldesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastupdated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.dismissalid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.dismissalid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.dismissalid })
+        </td>
+    </tr>
+}
+
+</table>

@@ -11,115 +11,108 @@ using CricketStats.Models;
 
 namespace CricketStats.Controllers
 {
-    public class MatchTypesController : Controller
+    public class MatchesController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: MatchTypes
-        public async Task<ActionResult> Index()
+        // GET: Matches
+        public async Task<ActionResult> Index(Guid? Matchtype)
         {
-            return View(await db.MatchTypes.ToListAsync());
+            return View(await db.Matches.Where(m => m.matchtypeid == Matchtype).ToListAsync());
         }
 
-        // GET: MatchTypes Partial Render for Menus
-        public ActionResult  Menu()
-        {
-            return PartialView("_MatchTypeMenu", db.MatchTypes.ToList());
-
-        }
-
-        // GET: MatchTypes/Details/5
+          // GET: Matches/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            if (matchType == null)
+            Match match = await db.Matches.FindAsync(id);
+            if (match == null)
             {
                 return HttpNotFound();
             }
-            return View(matchType);
+            return View(match);
         }
 
-        // GET: MatchTypes/Create
+        // GET: Matches/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MatchTypes/Create
+        // POST: Matches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "matchtypeid,matchtypename,lastupdated")] MatchType matchType)
+        public async Task<ActionResult> Create([Bind(Include = "matchid,matchnumber,homecountryid,awaycountryid,venueid,matchtypeid,matchstartdate,tosswinnercountryid,lastupdated")] Match match)
         {
             if (ModelState.IsValid)
             {
-                matchType.matchtypeid = Guid.NewGuid();
-                db.MatchTypes.Add(matchType);
+                match.matchid = Guid.NewGuid();
+                db.Matches.Add(match);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(matchType);
+            return View(match);
         }
 
-        // GET: MatchTypes/Edit/5
+        // GET: Matches/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            if (matchType == null)
+            Match match = await db.Matches.FindAsync(id);
+            if (match == null)
             {
                 return HttpNotFound();
             }
-            return View(matchType);
+            return View(match);
         }
 
-        // POST: MatchTypes/Edit/5
+        // POST: Matches/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "matchtypeid,matchtypename,lastupdated")] MatchType matchType)
+        public async Task<ActionResult> Edit([Bind(Include = "matchid,matchnumber,homecountryid,awaycountryid,venueid,matchtypeid,matchstartdate,tosswinnercountryid,lastupdated")] Match match)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(matchType).State = EntityState.Modified;
+                db.Entry(match).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(matchType);
+            return View(match);
         }
 
-        // GET: MatchTypes/Delete/5
+        // GET: Matches/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            if (matchType == null)
+            Match match = await db.Matches.FindAsync(id);
+            if (match == null)
             {
                 return HttpNotFound();
             }
-            return View(matchType);
+            return View(match);
         }
 
-        // POST: MatchTypes/Delete/5
+        // POST: Matches/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            db.MatchTypes.Remove(matchType);
+            Match match = await db.Matches.FindAsync(id);
+            db.Matches.Remove(match);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

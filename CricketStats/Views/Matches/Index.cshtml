@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CricketStats.Models.Match>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.matchnumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.homecountryid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.awaycountryid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.venueid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.matchtypeid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.matchstartdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tosswinnercountryid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.matchnumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.homecountryid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.awaycountryid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.venueid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.matchtypeid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.matchstartdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tosswinnercountryid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastupdated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.matchid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.matchid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.matchid })
+        </td>
+    </tr>
+}
+
+</table>

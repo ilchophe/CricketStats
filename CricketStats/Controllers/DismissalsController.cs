@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -11,116 +10,109 @@ using CricketStats.Models;
 
 namespace CricketStats.Controllers
 {
-    public class MatchTypesController : Controller
+    public class DismissalsController : Controller
     {
         private Entities db = new Entities();
 
-        // GET: MatchTypes
-        public async Task<ActionResult> Index()
+        // GET: Dismissals
+        public ActionResult Index()
         {
-            return View(await db.MatchTypes.ToListAsync());
+            return View(db.Dismissals.ToList());
         }
 
-        // GET: MatchTypes Partial Render for Menus
-        public ActionResult  Menu()
-        {
-            return PartialView("_MatchTypeMenu", db.MatchTypes.ToList());
-
-        }
-
-        // GET: MatchTypes/Details/5
-        public async Task<ActionResult> Details(Guid? id)
+        // GET: Dismissals/Details/5
+        public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            if (matchType == null)
+            Dismissal dismissal = db.Dismissals.Find(id);
+            if (dismissal == null)
             {
                 return HttpNotFound();
             }
-            return View(matchType);
+            return View(dismissal);
         }
 
-        // GET: MatchTypes/Create
+        // GET: Dismissals/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MatchTypes/Create
+        // POST: Dismissals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "matchtypeid,matchtypename,lastupdated")] MatchType matchType)
+        public ActionResult Create([Bind(Include = "dismissalid,dismissalcode,dismissaldesc,lastupdated")] Dismissal dismissal)
         {
             if (ModelState.IsValid)
             {
-                matchType.matchtypeid = Guid.NewGuid();
-                db.MatchTypes.Add(matchType);
-                await db.SaveChangesAsync();
+                dismissal.dismissalid = Guid.NewGuid();
+                db.Dismissals.Add(dismissal);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(matchType);
+            return View(dismissal);
         }
 
-        // GET: MatchTypes/Edit/5
-        public async Task<ActionResult> Edit(Guid? id)
+        // GET: Dismissals/Edit/5
+        public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            if (matchType == null)
+            Dismissal dismissal = db.Dismissals.Find(id);
+            if (dismissal == null)
             {
                 return HttpNotFound();
             }
-            return View(matchType);
+            return View(dismissal);
         }
 
-        // POST: MatchTypes/Edit/5
+        // POST: Dismissals/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "matchtypeid,matchtypename,lastupdated")] MatchType matchType)
+        public ActionResult Edit([Bind(Include = "dismissalid,dismissalcode,dismissaldesc,lastupdated")] Dismissal dismissal)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(matchType).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.Entry(dismissal).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(matchType);
+            return View(dismissal);
         }
 
-        // GET: MatchTypes/Delete/5
-        public async Task<ActionResult> Delete(Guid? id)
+        // GET: Dismissals/Delete/5
+        public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            if (matchType == null)
+            Dismissal dismissal = db.Dismissals.Find(id);
+            if (dismissal == null)
             {
                 return HttpNotFound();
             }
-            return View(matchType);
+            return View(dismissal);
         }
 
-        // POST: MatchTypes/Delete/5
+        // POST: Dismissals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
-            MatchType matchType = await db.MatchTypes.FindAsync(id);
-            db.MatchTypes.Remove(matchType);
-            await db.SaveChangesAsync();
+            Dismissal dismissal = db.Dismissals.Find(id);
+            db.Dismissals.Remove(dismissal);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

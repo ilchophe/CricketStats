@@ -1,0 +1,42 @@
+﻿@model CricketStats.Models.Dismissal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Dismissal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dismissalcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dismissalcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dismissaldesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dismissaldesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastupdated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.dismissalid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

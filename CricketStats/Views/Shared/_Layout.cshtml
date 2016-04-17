@@ -33,9 +33,10 @@
                             <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
                             <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
                             <li>@Html.ActionLink("Matchtypes", "Index", "MatchTypes")</li>
+                            <li>@Html.ActionLink("Dismissals", "Index", "Dismissals")</li>
                         </ul>
                     </li>
-                    
+                        @{Html.RenderAction(actionName: "Menu", controllerName: "MatchTypes");}
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

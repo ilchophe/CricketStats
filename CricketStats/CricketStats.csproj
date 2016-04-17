@@ -185,8 +185,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\DismissalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\MatchTypesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
@@ -553,6 +555,17 @@
     <Content Include="Views\MatchTypes\Edit.cshtml" />
     <Content Include="Views\MatchTypes\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Matches\Create.cshtml" />
+    <Content Include="Views\Matches\Delete.cshtml" />
+    <Content Include="Views\Matches\Details.cshtml" />
+    <Content Include="Views\Matches\Edit.cshtml" />
+    <Content Include="Views\Matches\Index.cshtml" />
+    <Content Include="Views\Shared\_MatchTypeMenu.cshtml" />
+    <Content Include="Views\Dismissals\Create.cshtml" />
+    <Content Include="Views\Dismissals\Delete.cshtml" />
+    <Content Include="Views\Dismissals\Details.cshtml" />
+    <Content Include="Views\Dismissals\Edit.cshtml" />
+    <Content Include="Views\Dismissals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
