@@ -63,6 +63,7 @@
     <Folder Include="Tables\" />
     <Folder Include="Views\" />
     <Folder Include="Stored Procedures\" />
+    <Folder Include="Sample DB Backup" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Country.sql" />
@@ -79,5 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CricketStatsDatabase.publish.xml" />
+    <None Include="Sample DB Backup\CricketStats_20160417.zip" />
   </ItemGroup>
 </Project>
