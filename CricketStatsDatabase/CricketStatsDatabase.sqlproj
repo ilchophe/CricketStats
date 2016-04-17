@@ -77,4 +77,7 @@
     <Build Include="Stored Procedures\GetPlayersByCountry.sql" />
     <Build Include="Stored Procedures\GetVenuesByCountry.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CricketStatsDatabase.publish.xml" />
+  </ItemGroup>
 </Project>

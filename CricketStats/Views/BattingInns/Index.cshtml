@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CricketStats.Models.BattingInn>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.runs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ballsfaced)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sixes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dismissal.dismissalcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.countrycode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Match.matchid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Player.playername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerBowler.playername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerFielder.playername)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.runs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ballsfaced)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sixes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastupdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dismissal.dismissalcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.countrycode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Match.matchid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Player.playername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerBowler.playername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerFielder.playername)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

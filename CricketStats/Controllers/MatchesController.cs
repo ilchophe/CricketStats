@@ -26,6 +26,8 @@ namespace CricketStats.Controllers
                 m => m.CountryAway).Include(
                 m => m.CountryHome);
 
+            ViewData["MatchTypeName"] = await db.MatchTypes.FindAsync(Matchtype);
+            
             return View(await matches.Where(m => m.matchtypeid == Matchtype).ToListAsync());
         }
 

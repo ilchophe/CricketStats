@@ -38,6 +38,7 @@ namespace CricketStats.Controllers
         }
 
         // GET: Players/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.countryid = new SelectList(db.Countries, "countryid", "countrydesc");

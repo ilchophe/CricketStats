@@ -1,0 +1,106 @@
+﻿@model CricketStats.Models.BattingInn
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BattingInn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.runs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.runs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ballsfaced)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ballsfaced)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sixes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sixes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastupdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastupdated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dismissal.dismissalcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dismissal.dismissalcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.countrycode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.countrycode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Match.matchid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Match.matchid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.playername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player.playername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerBowler.playername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerBowler.playername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerFielder.playername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerFielder.playername)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

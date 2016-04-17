@@ -184,6 +184,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BattingInnsController.cs" />
+    <Compile Include="Controllers\BowlingInnsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\DismissalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -247,6 +249,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\MatchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -568,6 +571,16 @@
     <Content Include="Views\Dismissals\Details.cshtml" />
     <Content Include="Views\Dismissals\Edit.cshtml" />
     <Content Include="Views\Dismissals\Index.cshtml" />
+    <Content Include="Views\BattingInns\Create.cshtml" />
+    <Content Include="Views\BattingInns\Delete.cshtml" />
+    <Content Include="Views\BattingInns\Details.cshtml" />
+    <Content Include="Views\BattingInns\Edit.cshtml" />
+    <Content Include="Views\BattingInns\Index.cshtml" />
+    <Content Include="Views\BowlingInns\Create.cshtml" />
+    <Content Include="Views\BowlingInns\Delete.cshtml" />
+    <Content Include="Views\BowlingInns\Details.cshtml" />
+    <Content Include="Views\BowlingInns\Edit.cshtml" />
+    <Content Include="Views\BowlingInns\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -581,6 +594,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
