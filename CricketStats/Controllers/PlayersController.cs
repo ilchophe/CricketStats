@@ -18,7 +18,7 @@ namespace CricketStats.Controllers
         // GET: Players
         public async Task<ActionResult> Index()
         {
-            var players = db.Players.Include(p => p.Country);
+            var players = db.Players.Include(p => p.Country).OrderBy(p => p.playersurname).ThenBy(p => p.playername);
             return View(await players.ToListAsync());
         }
 

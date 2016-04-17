@@ -160,7 +160,6 @@ namespace CricketStats.Models
         public string matchtypename { get; set; }
 
         [Display(Name = "Last Updated")]
-        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime lastupdated { get; set; }
     }
 
@@ -178,7 +177,7 @@ namespace CricketStats.Models
         public string playersurname;
 
         [Display(Name = "Date of Birth")]
-        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:dd/MM/yyyy}")]
+       // [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime dob { get; set; }
 
         [Display(Name = "Retired")]

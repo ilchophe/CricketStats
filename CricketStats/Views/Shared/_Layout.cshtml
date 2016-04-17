@@ -6,7 +6,10 @@
     <title>@ViewBag.Title - CricketStats</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jqueryui")
+    @Styles.Render("~/Content/dataTables")
     @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("styles", required: false)
 
 </head>
 <body>
@@ -51,7 +54,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
-<script>
+    @Scripts.Render("~/bundles/dataTables")
+    <script>
     $(function () {
         $(".jqueryui-marker-datepicker").datepicker({
             dateFormat: "dd/mm/yy",
@@ -63,6 +67,7 @@
         }
          })
     });
+
 </script>
     @RenderSection("scripts", required: false)
 </body>

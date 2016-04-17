@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#playerTable
+{
+    width:100%;
+
+}

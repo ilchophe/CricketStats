@@ -32,6 +32,31 @@ namespace CricketStats
 
             bundles.Add(new StyleBundle("~/Content/jqueryui").Include(
                       "~/Content/themes/base/all.css"));
+
+            bundles.Add(new StyleBundle("~/Content/dataTables").Include(
+                     "~/Content/DataTables/css/dataTables.bootstrap.css",
+                     "~/Content/DataTables/css/autoFill.bootstrap.css",
+                     "~/Content/DataTables/css/buttons.bootstrap.css",
+                     "~/Content/DataTables/css/colReorder.bootstrap.css",
+                     "~/Content/DataTables/css/fixedColumns.bootstrap.css",
+                     "~/Content/DataTables/css/select.bootstrap.css",
+                     "~/Content/DataTables/css/scroller.bootstrap.css",
+                     "~/Content/DataTables/css/rowReorder.bootstrap.css",
+                     "~/Content/DataTables/css/responsive.bootstrap.css",
+                     "~/Content/DataTables/css/keyTable.bootstrap.css",
+                     "~/Content/DataTables/css/fixedHeader.bootstrap.css"
+
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
+                      "~/Scripts/DataTables/jquery.dataTables.js", 
+                      "~/Scripts/DataTables/dataTables.bootstrap.js"
+                      //,
+                      //"~/Scripts/DataTables/buttons.bootstrap.js"
+                      
+                ));
+
+
         }
     }
 }

@@ -1,71 +1,146 @@
 ﻿@model IEnumerable<CricketStats.Models.Player>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Players";
 }
 
-<h2>Index</h2>
+@section styles{
+
+    <style>
+        tfoot { display: table-header-group; }
+    </style>
+}
+
+<h2>Player Listing</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
 </p>
 
 
-@{
-    WebGrid obj = new WebGrid(Model);
-}
-@obj.GetHtml(tableStyle: "table", numericLinksCount: 10);
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.playername)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.playersurname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dob)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.retired)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.lastupdated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.countrydesc)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.playername)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.playersurname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dob)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.retired)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastupdated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.countrydesc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.playerid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.playerid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.playerid })
-        </td>
-    </tr>
-}
+<table id="playerTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.playername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.playersurname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.retired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country.countrydesc)
+            </th>
+            <th class="no-sort"></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.playername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.playersurname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.retired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastupdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country.countrydesc)
+            </th>
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.playername)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.playersurname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.retired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastupdated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.countrydesc)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.playerid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.playerid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.playerid })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            //$('#playerTable').DataTable(
+            //);
+
+
+            // Setup - add a text input to each footer cell
+            $('#playerTable tfoot th').each(function () {
+                var title = $(this).text();
+                if (title != '') {
+                    $(this).html('<input class="form-control input-sm" type="text" placeholder="' + title + '" />');
+                }
+                
+            });
+
+            // DataTable
+            var table = $('#playerTable').DataTable({
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
+}
+
+
